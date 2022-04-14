@@ -1,5 +1,4 @@
 - 👋 Hi, I’m @dariodesalvo
-- :arrows_counterclockwise: Currently returning to study Systems at the UTN.
 - :cyclone: Web Developer
 - :bar_chart: Studying and training DataScience
 - :round_pushpin: Love chess and swimming
