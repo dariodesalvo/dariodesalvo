@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>Darío Desalvo — Analista de Sistemas | Desarrollador Backend Python & Go</title>
+    <meta name="description" content="CV de Darío Ezequiel Desalvo. Analista de Sistemas (UTN FRBA). Desarrollador Backend especializado en Python, Go, automatización y administración de servidores Linux. Buenos Aires, Argentina.">
+    <meta name="keywords" content="Darío Desalvo, Dario Desalvo, CV, curriculum vitae, desarrollador backend, Python, Go, analista de sistemas, UTN, Buenos Aires, automatización, FastAPI, Laravel, backend developer, resume">
+    <meta name="author" content="Darío Ezequiel Desalvo">
+    <link rel="canonical" href="https://dariodesalvo.github.io/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Darío Desalvo — Analista de Sistemas | Desarrollador Backend">
+    <meta property="og:description" content="CV de Darío Ezequiel Desalvo. Desarrollador Backend especializado en Python, Go y automatización. Buenos Aires, Argentina.">
+    <meta property="og:url" content="https://dariodesalvo.github.io/">
+    <meta property="og:type" content="profile">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="profile:first_name" content="Darío">
+    <meta property="profile:last_name" content="Desalvo">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Darío Desalvo — Desarrollador Backend">
+    <meta name="twitter:description" content="Analista de Sistemas | Backend Python & Go | Automatización">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Darío Ezequiel Desalvo",
+        "alternateName": "Dario Desalvo",
+        "url": "https://dariodesalvo.github.io",
+        "email": "dariodesalvo@gmail.com",
+        "telephone": "+5491135584971",
+        "jobTitle": "Systems Analyst / Backend Developer",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Buenos Aires",
+            "addressCountry": "AR"
+        },
+        "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Universidad Tecnológica Nacional — FRBA"
+        },
+        "knowsAbout": ["Python", "Go", "FastAPI", "Laravel", "PostgreSQL", "Linux", "Automation", "n8n", "Docker"],
+        "knowsLanguage": ["es", "en"],
+        "sameAs": [
+            "https://github.com/dariodesalvo",
+            "https://www.linkedin.com/in/dar%C3%ADo-desalvo/"
+        ]
+    }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0e1117;
+            --bg-card: #161b22;
+            --bg-card-hover: #1c2333;
+            --border: #30363d;
+            --border-accent: #3b82f6;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent: #58a6ff;
+            --accent-dim: #1f3a5f;
+            --green: #3fb950;
+            --green-dim: #1a3a2a;
+            --orange: #d29922;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(88, 166, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(88, 166, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            z-index: 100;
+            display: flex;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+
+        .lang-toggle button {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .lang-toggle button:hover {
+            color: var(--text-secondary);
+        }
+
+        .lang-toggle button.active {
+            background: var(--accent-dim);
+            color: var(--accent);
+        }
+
+        .lang-toggle button:first-child {
+            border-right: 1px solid var(--border);
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 48px;
+        }
+
+        .header__name {
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header__title {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .header__contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 24px;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+
+        .header__contact a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .header__contact a:hover {
+            color: var(--text-primary);
+        }
+
+        .header__contact span::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-dim);
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section__title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .profile {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.75;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .skill-group {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 16px;
+            transition: border-color 0.2s;
+        }
+
+        .skill-group:hover {
+            border-color: var(--border-accent);
+        }
+
+        .skill-group__label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .skill-group__items {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .skill-group__items strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Experience */
+        .job {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px 22px;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+        }
+
+        .job:hover {
+            border-color: var(--border-accent);
+        }
+
+        .job__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 4px 12px;
+            margin-bottom: 4px;
+        }
+
+        .job__role {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .job__dates {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+        }
+
+        .job__company {
+            font-size: 0.88rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .job__items {
+            list-style: none;
+            padding: 0;
+        }
+
+        .job__items li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 6px;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .job__items li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Education */
+        .edu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 2px 12px;
+            margin-bottom: 12px;
+        }
+
+        .edu-item__degree {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .edu-item__year {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .edu-item__school {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            width: 100%;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+
+        .badge--green {
+            background: var(--green-dim);
+            color: var(--green);
+            border: 1px solid var(--green);
+        }
+
+        /* Certs */
+        .cert-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cert-list li {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .cert-list li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .cert-list li strong {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container { padding: 24px 16px 60px; }
+            .header__name { font-size: 1.8rem; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .job__header { flex-direction: column; }
+            .edu-item { flex-direction: column; }
+            .lang-toggle { top: 12px; right: 12px; }
+        }
+
+        /* Print */
+        @media print {
+            body { background: #fff; color: #111; }
+            body::before { display: none; }
+            .lang-toggle { display: none; }
+            .section__title { color: #333; border-color: #ccc; }
+            .job, .skill-group { background: #fff; border-color: #ddd; }
+            .header__name { -webkit-text-fill-color: #111; background: none; }
+            .header__title { color: #555; }
+            a { color: #0066cc; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Language Toggle -->
+<div class="lang-toggle">
+    <button id="btn-es" class="active" onclick="setLang('es')">ES</button>
+    <button id="btn-en" onclick="setLang('en')">EN</button>
+</div>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <header class="header">
+        <h1 class="header__name">Darío Ezequiel Desalvo</h1>
+        <p class="header__title" data-es="Analista de Sistemas · Desarrollador Backend · Automatización" data-en="Systems Analyst · Backend Developer · Automation">Analista de Sistemas · Desarrollador Backend · Automatización</p>
+        <div class="header__contact">
+            <span><a href="mailto:dariodesalvo@gmail.com">dariodesalvo@gmail.com</a></span>
+            <span><a href="tel:+5491135584971">+54 9 11 3558-4971</a></span>
+            <span><a href="https://github.com/dariodesalvo" target="_blank" rel="noopener">GitHub</a></span>
+            <span><a href="https://www.linkedin.com/in/dar%C3%ADo-desalvo/" target="_blank" rel="noopener">LinkedIn</a></span>
+        </div>
+    </header>
+
+    <!-- PERFIL -->
+    <section class="section">
+        <h2 class="section__title" data-es="Perfil Profesional" data-en="Professional Profile">Perfil Profesional</h2>
+        <p class="profile" data-es="Analista de Sistemas con más de 10 años de experiencia en desarrollo de software y administración de sistemas. Especializado en desarrollo backend con Python y PHP, automatización de procesos y administración de servidores Linux. Experiencia comprobada construyendo bots, pipelines de automatización, APIs REST y sistemas internos en entornos reales. Perfil orientado a la resolución de problemas, la mejora continua y la implementación de soluciones eficientes." data-en="Systems Analyst with 10+ years of experience in software development and systems administration. Specialized in backend development with Python and PHP, process automation, and Linux server administration. Proven track record building bots, automation pipelines, REST APIs, and internal systems in real-world environments. Problem-solving oriented, committed to continuous improvement and efficient solutions.">Analista de Sistemas con más de 10 años de experiencia en desarrollo de software y administración de sistemas. Especializado en desarrollo backend con Python y PHP, automatización de procesos y administración de servidores Linux. Experiencia comprobada construyendo bots, pipelines de automatización, APIs REST y sistemas internos en entornos reales. Perfil orientado a la resolución de problemas, la mejora continua y la implementación de soluciones eficientes.</p>
+    </section>
+
+    <!-- HABILIDADES -->
+    <section class="section">
+        <h2 class="section__title" data-es="Habilidades Técnicas" data-en="Technical Skills">Habilidades Técnicas</h2>
+        <div class="skills-grid">
+            <div class="skill-group">
+                <div class="skill-group__label" data-es="Lenguajes" data-en="Languages">Lenguajes</div>
+                <div class="skill-group__items"><strong>Python</strong>, <strong>Go</strong>, C, PHP, JavaScript, SQL</div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group__label">Backend & Frameworks</div>
+                <div class="skill-group__items"><strong>FastAPI</strong>, Laravel, Express.js, net/http (Go)</div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group__label" data-es="Bases de datos" data-en="Databases">Bases de datos</div>
+                <div class="skill-group__items"><strong>PostgreSQL</strong>, MySQL, MongoDB</div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group__label" data-es="Automatización & DevOps" data-en="Automation & DevOps">Automatización & DevOps</div>
+                <div class="skill-group__items"><strong>n8n</strong>, Docker, Linux, Bash, Git, CI/CD</div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group__label" data-es="APIs & Integraciones" data-en="APIs & Integrations">APIs & Integraciones</div>
+                <div class="skill-group__items">REST APIs, Telegram Bot API, Web Scraping, LLM APIs (Claude, Gemini)</div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group__label">Frontend</div>
+                <div class="skill-group__items">Vue.js, HTML/CSS, Bootstrap</div>
+            </div>
+            <div class="skill-group" style="grid-column: 1 / -1;">
+                <div class="skill-group__label" data-es="Otros" data-en="Other">Otros</div>
+                <div class="skill-group__items" data-es="Patrones de diseño, Paradigmas de programación, Web3/Solidity, Power BI" data-en="Design Patterns, Programming Paradigms, Web3/Solidity, Power BI">Patrones de diseño, Paradigmas de programación, Web3/Solidity, Power BI</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCIA -->
+    <section class="section">
+        <h2 class="section__title" data-es="Experiencia Laboral" data-en="Work Experience">Experiencia Laboral</h2>
+
+        <article class="job">
+            <div class="job__header">
+                <span class="job__role" data-es="Desarrollador Backend & Automatización" data-en="Backend Developer & Automation">Desarrollador Backend & Automatización</span>
+                <span class="job__dates" data-es="2019 — Actualidad" data-en="2019 — Present">2019 — Actualidad</span>
+            </div>
+            <div class="job__company">Freelance</div>
+            <ul class="job__items">
+                <li data-es="Desarrollo de un bot de Telegram en Python con integración a LLMs (Claude, Gemini) para gestión de agenda con procesamiento de lenguaje natural, base de datos PostgreSQL y sistema de recordatorios automatizados vía n8n." data-en="Built a Telegram bot in Python with LLM integration (Claude, Gemini) for agenda management using natural language processing, PostgreSQL database, and automated reminders via n8n.">Desarrollo de un bot de Telegram en Python con integración a LLMs (Claude, Gemini) para gestión de agenda con procesamiento de lenguaje natural, base de datos PostgreSQL y sistema de recordatorios automatizados vía n8n.</li>
+                <li data-es="Construcción de pipelines de generación automática de videos en Python para contenido de ajedrez (ChessPulse), incluyendo renderizado de texto, procesamiento de imágenes y publicación automatizada." data-en="Built automated video generation pipelines in Python for chess content (ChessPulse), including text rendering, image processing, and automated publishing.">Construcción de pipelines de generación automática de videos en Python para contenido de ajedrez (ChessPulse), incluyendo renderizado de texto, procesamiento de imágenes y publicación automatizada.</li>
+                <li data-es="Desarrollo de API REST con FastAPI para blog con diseño temático, integración con redes sociales." data-en="Developed a REST API with FastAPI for a themed blog with social media integration.">Desarrollo de API REST con FastAPI para blog con diseño temático, integración con redes sociales.</li>
+                <li data-es="Administración de servidor Linux (Hetzner) consolidando múltiples servicios: n8n, aplicaciones web, bots." data-en="Linux server administration (Hetzner) consolidating multiple services: n8n, web applications, bots.">Administración de servidor Linux (Hetzner) consolidando múltiples servicios: n8n, aplicaciones web, bots.</li>
+                <li data-es="Desarrollo de aplicaciones web con Laravel (orientacionvocacionalsos.com.ar) y trivias interactivas con Vue.js." data-en="Web application development with Laravel (orientacionvocacionalsos.com.ar) and interactive trivia apps with Vue.js.">Desarrollo de aplicaciones web con Laravel (orientacionvocacionalsos.com.ar) y trivias interactivas con Vue.js.</li>
+            </ul>
+        </article>
+
+        <article class="job">
+            <div class="job__header">
+                <span class="job__role" data-es="Administrativo / Desarrollador Interno" data-en="Administrative Staff / Internal Developer">Administrativo / Desarrollador Interno</span>
+                <span class="job__dates" data-es="2013 — Actualidad" data-en="2013 — Present">2013 — Actualidad</span>
+            </div>
+            <div class="job__company" data-es="UBA — Facultad de Filosofía y Letras" data-en="UBA — Faculty of Philosophy and Literature">UBA — Facultad de Filosofía y Letras</div>
+            <ul class="job__items">
+                <li data-es="Diseño, desarrollo e implementación de una aplicación interna para gestión de concursos docentes utilizando Laravel y MySQL." data-en="Designed, developed, and deployed an internal application for faculty hiring management using Laravel and MySQL.">Diseño, desarrollo e implementación de una aplicación interna para gestión de concursos docentes utilizando Laravel y MySQL.</li>
+                <li data-es="Desarrollo de soluciones de automatización documental: generación de actas de cierre, procesamiento de datos desde Excel y creación de documentos formateados en lote." data-en="Developed document automation solutions: closure report generation, Excel data processing, and batch-formatted document creation.">Desarrollo de soluciones de automatización documental: generación de actas de cierre, procesamiento de datos desde Excel y creación de documentos formateados en lote.</li>
+            </ul>
+        </article>
+
+        <article class="job">
+            <div class="job__header">
+                <span class="job__role" data-es="Programador Web" data-en="Web Developer">Programador Web</span>
+                <span class="job__dates" data-es="Abr 2010 — May 2012" data-en="Apr 2010 — May 2012">Abr 2010 — May 2012</span>
+            </div>
+            <div class="job__company">Focusmedia</div>
+            <ul class="job__items">
+                <li data-es="Desarrollo backend de sitios web con PHP (quevasaestudiar.com)." data-en="Backend development of websites using PHP (quevasaestudiar.com).">Desarrollo backend de sitios web con PHP (quevasaestudiar.com).</li>
+                <li data-es="Sistemas de acreditación de eventos y automatización de campañas de email marketing." data-en="Event accreditation systems and email marketing campaign automation.">Sistemas de acreditación de eventos y automatización de campañas de email marketing.</li>
+            </ul>
+        </article>
+    </section>
+
+    <!-- FORMACIÓN -->
+    <section class="section">
+        <h2 class="section__title" data-es="Formación Académica" data-en="Education">Formación Académica</h2>
+
+        <div class="edu-item">
+            <span class="edu-item__degree" data-es='Analista Universitario de Sistemas <span class="badge badge--green">Completado</span>' data-en='University Systems Analyst <span class="badge badge--green">Completed</span>'>Analista Universitario de Sistemas <span class="badge badge--green">Completado</span></span>
+            <span class="edu-item__year">Nov 2025</span>
+            <span class="edu-item__school">Universidad Tecnológica Nacional — FRBA</span>
+        </div>
+    </section>
+
+    <!-- CURSOS -->
+    <section class="section">
+        <h2 class="section__title" data-es="Cursos y Certificaciones" data-en="Courses & Certifications">Cursos y Certificaciones</h2>
+        <ul class="cert-list">
+            <li data-es="<strong>2025</strong> — Back-end Developer Path in Python & Go — BootDev (en curso 71%)" data-en="<strong>2025</strong> — Back-end Developer Path in Python & Go — BootDev (in progress 71%)"><strong>2025</strong> — Back-end Developer Path in Python & Go — BootDev (en curso 71%)</li>
+            <li data-es="<strong>2021</strong> — Ciencia de Datos 360 con Python — Escuela de Datos Vivos" data-en="<strong>2021</strong> — Data Science 360 with Python — Escuela de Datos Vivos"><strong>2021</strong> — Ciencia de Datos 360 con Python — Escuela de Datos Vivos</li>
+            <li data-es="<strong>2019</strong> — Diplomatura en Desarrollo Mobile — UTN Buenos Aires" data-en="<strong>2019</strong> — Mobile Development Diploma — UTN Buenos Aires"><strong>2019</strong> — Diplomatura en Desarrollo Mobile — UTN Buenos Aires</li>
+            <li data-es="<strong>2009</strong> — Professional Webmaster — UTN Buenos Aires" data-en="<strong>2009</strong> — Professional Webmaster — UTN Buenos Aires"><strong>2009</strong> — Professional Webmaster — UTN Buenos Aires</li>
+        </ul>
+    </section>
+
+    <!-- IDIOMAS -->
+    <section class="section">
+        <h2 class="section__title" data-es="Idiomas" data-en="Languages">Idiomas</h2>
+        <p class="profile" data-es="Inglés: B1" data-en="Spanish: Native — English: B1">Inglés: B1</p>
+    </section>
+
+    <footer class="footer">
+        <p>Darío Desalvo — Buenos Aires, Argentina — 2026</p>
+    </footer>
+
+</div>
+
+<script>
+    function setLang(lang) {
+        document.documentElement.lang = lang;
+        document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+        document.querySelectorAll('[data-' + lang + ']').forEach(function(el) {
+            el.innerHTML = el.getAttribute('data-' + lang);
+        });
+
+        try { localStorage.setItem('cv-lang', lang); } catch(e) {}
+    }
+
+    // Restore saved language preference
+    try {
+        var saved = localStorage.getItem('cv-lang');
+        if (saved === 'en') setLang('en');
+    } catch(e) {}
+</script>
+
+</body>
+</html>
