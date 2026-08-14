@@ -263,7 +263,10 @@
     #cv-doc .cv-role{font-size:11.5pt;color:#333;margin-bottom:6pt}
     #cv-doc .cv-contact{font-family:var(--mono);font-size:9pt;color:#444;margin-bottom:14pt;border-bottom:1.5pt solid #111;padding-bottom:10pt}
     #cv-doc .cv-contact span{margin-right:14pt}
-    #cv-doc h2{font-family:var(--mono);font-size:11pt;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin:16pt 0 8pt;padding-bottom:3pt;border-bottom:.75pt solid #bbb}
+    #cv-doc h2{font-family:var(--mono);font-size:11pt;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin:16pt 0 8pt;padding-bottom:3pt;border-bottom:.75pt solid #bbb;break-after:avoid;page-break-after:avoid}
+    /* el stack arranca hoja nueva: sin esto el h2 queda al pie de la primera */
+    #cv-doc h2.cv-break{break-before:page;page-break-before:always;margin-top:0}
+    #cv-doc .cv-skills,#cv-doc .cv-certs{break-inside:avoid;page-break-inside:avoid}
     #cv-doc .cv-summary{margin-bottom:2pt}
     #cv-doc .cv-item{margin-bottom:10pt;page-break-inside:avoid}
     #cv-doc .cv-item .h{display:flex;justify-content:space-between;align-items:baseline;gap:12pt}
@@ -317,7 +320,7 @@
       <div class="stat"><div class="n">+10</div><div class="l" data-en='years of experience'>años de experiencia</div></div>
       <div class="stat"><div class="n">2010</div><div class="l" data-en='first tech job'>primer trabajo de programador</div></div>
       <div class="stat"><div class="n">6</div><div class="l" data-en='languages in the stack'>lenguajes en el stack</div></div>
-      <div class="stat"><div class="n">GMT-3</div><div class="l" data-en='Buenos Aires · remote'>Buenos Aires · remoto</div></div>
+      <div class="stat"><div class="n">GMT-3</div><div class="l" data-en='Buenos Aires · remote / on-site'>Buenos Aires · remoto / presencial</div></div>
     </div>
   </div>
 </header>
@@ -602,7 +605,7 @@
   <div class="cv-role" data-en='Systems Analyst · Backend Developer &amp; Automation'>Analista de Sistemas · Desarrollador Backend &amp; Automatización</div>
   <div class="cv-contact">
     <span>dariodesalvo@gmail.com</span>
-    <span data-en='Buenos Aires, Argentina (GMT-3) · remote'>Buenos Aires, Argentina (GMT-3) · remoto</span>
+    <span data-en='Buenos Aires, Argentina (GMT-3) · remote / on-site'>Buenos Aires, Argentina (GMT-3) · remoto / presencial</span>
     <span>github.com/dariodesalvo</span>
     <span>linkedin.com/in/darío-desalvo</span>
   </div>
@@ -648,7 +651,7 @@
     <div class="st">Flutter · FastAPI · PostgreSQL</div>
   </div>
 
-  <h2 data-en='Tech stack'>Stack técnico</h2>
+  <h2 class="cv-break" data-en='Tech stack'>Stack técnico</h2>
   <div class="cv-skills">
     <div><b data-en='Languages &amp; backend:'>Lenguajes &amp; backend:</b> Python, PHP/Laravel, FastAPI, SQL, JavaScript, Go <span data-en='(learning)'>(aprendiendo)</span></div>
     <div><b data-en='Data, infra &amp; devops:'>Datos, infra &amp; devops:</b> PostgreSQL, MySQL, Docker, Linux, Git / CI/CD, Bash</div>
