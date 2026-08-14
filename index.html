@@ -1,597 +1,748 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Darío Desalvo // Analista de Sistemas · Backend & Automatización</title>
+<meta name="description" content="Darío Ezequiel Desalvo — Analista de Sistemas (UTN FRBA) y desarrollador backend con 10+ años de experiencia en Python, PHP, automatización, integraciones con LLMs y administración de servidores Linux. Buenos Aires, Argentina.">
+<meta name="keywords" content="Darío Desalvo, Dario Desalvo, desarrollador backend, Python, PHP, FastAPI, Laravel, automatización, n8n, LLM, analista de sistemas, UTN, Odoo, Buenos Aires">
+<meta name="author" content="Darío Ezequiel Desalvo">
+<meta property="og:title" content="Darío Desalvo — Analista de Sistemas · Backend & Automatización">
+<meta property="og:description" content="Backend con Python y PHP, automatización de procesos y bots con IA. 10+ años de experiencia. Buenos Aires.">
+<meta property="og:type" content="website">
+<!-- favicon: monitor con prompt, mismo ink-blue del acento (SVG inline, sin archivo externo) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F4F2EC'/%3E%3Crect x='4' y='6' width='24' height='16' rx='2.5' fill='none' stroke='%231F3A8A' stroke-width='2'/%3E%3Cpath d='M12 27h8M16 22v5' stroke='%231F3A8A' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M9.5 11.5l3 2.5-3 2.5M15.5 17h6' stroke='%231F3A8A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F2EC;        /* papel cálido */
+    --bg-2:#EBE7DD;      /* inset / barra */
+    --panel:#FBFAF5;     /* tarjetas */
+    --line:#DAD6CC;      /* hairline */
+    --line-2:#C7C1B4;    /* borde fuerte */
+    --ink:#1B1A17;       /* tinta */
+    --dim:#6C685F;       /* texto secundario */
+    --dimmer:#9C978B;    /* números de línea, muy tenue */
+    --accent:#1F3A8A;    /* ink-blue */
+    --accent-2:#16296B;  /* ink-blue oscuro (hover) */
+    --accent-soft:rgba(31,58,138,.09);
+    --str:#7A5A12;       /* strings en syntax */
+    --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',monospace;
+    --sans:'Geist',system-ui,-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.6}
+  ::selection{background:var(--accent);color:#F4F2EC}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 40px}
+  .mono{font-family:var(--mono)}
+  .accent{color:var(--accent)}
+  .comment{color:var(--dim);font-family:var(--mono);font-size:13px;letter-spacing:.01em}
+  .comment::before{content:"# ";color:var(--dimmer)}
 
-    <!-- SEO -->
-    <title>Darío Desalvo — Analista de Sistemas | Desarrollador Backend Python & Go</title>
-    <meta name="description" content="CV de Darío Ezequiel Desalvo. Analista de Sistemas (UTN FRBA). Desarrollador Backend especializado en Python, Go, automatización y administración de servidores Linux. Buenos Aires, Argentina.">
-    <meta name="keywords" content="Darío Desalvo, Dario Desalvo, CV, curriculum vitae, desarrollador backend, Python, Go, analista de sistemas, UTN, Buenos Aires, automatización, FastAPI, Laravel, backend developer, resume">
-    <meta name="author" content="Darío Ezequiel Desalvo">
-    <link rel="canonical" href="https://dariodesalvo.github.io/">
+  /* papel de ingeniería, muy sutil */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:60px 60px;opacity:.45;
+    mask-image:radial-gradient(ellipse 90% 55% at 50% 0%,#000 0%,transparent 70%);
+    -webkit-mask-image:radial-gradient(ellipse 90% 55% at 50% 0%,#000 0%,transparent 70%);
+  }
+  main,nav{position:relative;z-index:1}
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Darío Desalvo — Analista de Sistemas | Desarrollador Backend">
-    <meta property="og:description" content="CV de Darío Ezequiel Desalvo. Desarrollador Backend especializado en Python, Go y automatización. Buenos Aires, Argentina.">
-    <meta property="og:url" content="https://dariodesalvo.github.io/">
-    <meta property="og:type" content="profile">
-    <meta property="og:locale" content="es_AR">
-    <meta property="og:locale:alternate" content="en_US">
-    <meta property="profile:first_name" content="Darío">
-    <meta property="profile:last_name" content="Desalvo">
+  /* NAV */
+  nav{border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:62px;font-family:var(--mono)}
+  .brand{font-size:15px;font-weight:700;letter-spacing:-.01em}
+  .brand .accent{margin-right:1px}
+  .nav-links{display:flex;gap:28px;font-size:13px}
+  .nav-links a{color:var(--dim);transition:color .15s}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-links a::before{content:"§ ";color:var(--dimmer)}
+  .nav-right{display:flex;align-items:center;gap:18px}
+  .status{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim);font-family:var(--mono)}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .lang-toggle{display:inline-flex;border:1px solid var(--line-2);border-radius:7px;overflow:hidden;font-family:var(--mono);font-size:12px;flex:none}
+  .lang-toggle button{padding:6px 11px;background:var(--panel);color:var(--dim);border:none;cursor:pointer;transition:all .15s;font-family:inherit;font-size:inherit;letter-spacing:.03em}
+  .lang-toggle button+button{border-left:1px solid var(--line-2)}
+  .lang-toggle button.active{background:var(--accent);color:#F4F2EC}
+  .lang-toggle button:hover:not(.active){color:var(--accent)}
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Darío Desalvo — Desarrollador Backend">
-    <meta name="twitter:description" content="Analista de Sistemas | Backend Python & Go | Automatización">
+  /* HERO — terminal impreso en papel */
+  .hero{padding:92px 0 72px}
+  .prompt{font-family:var(--mono);font-size:14px;color:var(--dim);margin-bottom:24px}
+  .prompt b{color:var(--accent);font-weight:500}
+  .hero h1{font-family:var(--mono);font-size:clamp(34px,5.6vw,66px);font-weight:800;line-height:1.06;letter-spacing:-.03em;margin-bottom:26px}
+  .hero h1 .accent{position:relative}
+  .cursor{display:inline-block;width:.5em;height:.95em;background:var(--accent);transform:translateY(.1em);animation:blink 1.1s step-end infinite;margin-left:5px;border-radius:1px}
+  @keyframes blink{50%{opacity:0}}
+  .hero p{font-size:19px;color:var(--dim);max-width:58ch;margin-bottom:34px}
+  .hero p strong{color:var(--ink);font-weight:600}
+  .hero-actions{display:flex;gap:13px;flex-wrap:wrap}
+  .btn{font-family:var(--mono);font-size:14px;padding:13px 22px;border-radius:8px;transition:all .18s;display:inline-flex;align-items:center;gap:9px;cursor:pointer;border:1px solid transparent}
+  .btn-primary{background:var(--accent);color:#F4F2EC;font-weight:500}
+  .btn-primary:hover{background:var(--accent-2);transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--line-2);color:var(--ink);background:var(--panel)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+  .btn-cv{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);font-weight:500}
+  .btn-cv:hover{background:var(--accent);color:#F4F2EC}
 
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Darío Ezequiel Desalvo",
-        "alternateName": "Dario Desalvo",
-        "url": "https://dariodesalvo.github.io",
-        "email": "dariodesalvo@gmail.com",
-        "telephone": "+5491135584971",
-        "jobTitle": "Systems Analyst / Backend Developer",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Buenos Aires",
-            "addressCountry": "AR"
-        },
-        "alumniOf": {
-            "@type": "CollegeOrUniversity",
-            "name": "Universidad Tecnológica Nacional — FRBA"
-        },
-        "knowsAbout": ["Python", "Go", "FastAPI", "Laravel", "PostgreSQL", "Linux", "Automation", "n8n", "Docker"],
-        "knowsLanguage": ["es", "en"],
-        "sameAs": [
-            "https://github.com/dariodesalvo",
-            "https://www.linkedin.com/in/dar%C3%ADo-desalvo/"
-        ]
-    }
-    </script>
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line-2);border-radius:12px;overflow:hidden;margin-top:60px}
+  .stat{background:var(--panel);padding:24px 22px}
+  .stat .n{font-family:var(--mono);font-size:30px;font-weight:800;color:var(--accent);line-height:1;letter-spacing:-.02em}
+  .stat .l{font-size:13px;color:var(--dim);margin-top:9px}
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  /* SECCIONES */
+  section{padding:84px 0;position:relative;z-index:1}
+  .sec-label{font-family:var(--mono);font-size:13px;color:var(--accent);margin-bottom:14px;letter-spacing:.02em}
+  .sec-label::before{content:"§ "}
+  .sec-title{font-family:var(--mono);font-size:clamp(26px,3.6vw,40px);font-weight:800;letter-spacing:-.02em;margin-bottom:10px}
+  .sec-intro{color:var(--dim);font-size:16px;max-width:60ch;margin-bottom:46px}
 
-    <style>
-        :root {
-            --bg: #0e1117;
-            --bg-card: #161b22;
-            --bg-card-hover: #1c2333;
-            --border: #30363d;
-            --border-accent: #3b82f6;
-            --text-primary: #e6edf3;
-            --text-secondary: #8b949e;
-            --text-muted: #6e7681;
-            --accent: #58a6ff;
-            --accent-dim: #1f3a5f;
-            --green: #3fb950;
-            --green-dim: #1a3a2a;
-            --orange: #d29922;
-        }
+  /* PROYECTOS destacados (numerados = ranking real de peso) */
+  .proj-list{display:flex;flex-direction:column;gap:16px}
+  .proj{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+  .proj:hover{border-color:var(--line-2);box-shadow:0 8px 30px -18px rgba(27,26,23,.35)}
+  .proj-top{display:grid;grid-template-columns:1.15fr .85fr;gap:0}
+  .proj-text{padding:32px 34px}
+  .proj-head{display:flex;align-items:baseline;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+  .proj-idx{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+  .proj-head h3{font-family:var(--mono);font-size:21px;font-weight:700;letter-spacing:-.01em}
+  .proj-head .tag{font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);background:var(--accent-soft);padding:3px 9px;border-radius:5px;margin-left:auto}
+  .proj-text p{font-size:15.5px;color:var(--dim);margin-bottom:22px}
+  .proj-stack{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
+  .proj-stack span{font-family:var(--mono);font-size:12px;color:var(--dim);background:var(--bg-2);padding:5px 11px;border-radius:6px;border:1px solid var(--line)}
+  .proj-links{display:flex;gap:18px;font-family:var(--mono);font-size:13px;flex-wrap:wrap}
+  .proj-links a{color:var(--accent);display:inline-flex;align-items:center;gap:6px}
+  .proj-links a:hover{text-decoration:underline}
+  .proj-links .muted{color:var(--dim)}
+  .proj-img{min-height:230px;border-left:1px solid var(--line);display:flex;align-items:center;justify-content:center;background:var(--bg-2);
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:24px 24px}
+  .proj-img .ph{font-family:var(--mono);font-size:12px;color:var(--dim);text-align:center;line-height:1.5}
+  .proj-img .ph b{display:block;color:var(--accent);font-size:24px;margin-bottom:8px}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* CAPTURAS reales: ventana al sistema, click para ampliar */
+  .shot{position:relative;overflow:hidden;display:block;padding:0;border:none;background:var(--bg-2);cursor:zoom-in;font:inherit;color:inherit}
+  .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:left top;transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+  .shot:hover img,.shot:focus-visible img{transform:scale(1.04)}
+  .shot-zoom{position:absolute;right:10px;bottom:10px;font-family:var(--mono);font-size:11px;color:var(--accent);
+    background:color-mix(in srgb,var(--panel) 92%,transparent);border:1px solid var(--line-2);border-radius:6px;padding:4px 9px;
+    opacity:0;transform:translateY(5px);transition:opacity .18s,transform .18s;pointer-events:none}
+  .shot:hover .shot-zoom,.shot:focus-visible .shot-zoom{opacity:1;transform:none}
+  .shot:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .proj-shot{min-height:230px;border-left:1px solid var(--line)}
 
-        body {
-            font-family: 'DM Sans', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
+  /* miniatura al tope de las tarjetas del carrusel (sangra hasta el borde) */
+  .fcard-thumb{margin:-26px -26px 18px;height:150px;overflow:hidden;border:none;border-bottom:1px solid var(--line);
+    border-radius:13px 13px 0 0;background:var(--bg-2);display:flex;align-items:center;justify-content:center}
+  .fcard-thumb.grid-ph{background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:24px 24px}
+  .fcard-thumb .ph{font-family:var(--mono);font-size:11.5px;color:var(--dim);text-align:center;line-height:1.5}
+  .fcard-thumb .ph b{display:block;color:var(--accent);font-size:20px;margin-bottom:6px}
 
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(88, 166, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(88, 166, 255, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            pointer-events: none;
-            z-index: 0;
-        }
+  /* LIGHTBOX */
+  .lb{padding:0;border:none;background:transparent;width:100%;max-width:100vw;height:100%;max-height:100vh;overflow:hidden}
+  .lb::backdrop{background:rgba(27,26,23,.86);backdrop-filter:blur(3px)}
+  .lb-in{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:56px 28px 32px}
+  .lb-in img{max-width:min(1240px,100%);max-height:calc(100vh - 150px);object-fit:contain;border-radius:10px;border:1px solid var(--line-2);background:var(--panel);box-shadow:0 30px 80px -34px rgba(0,0,0,.7)}
+  .lb-cap{font-family:var(--mono);font-size:12.5px;color:var(--bg);text-align:center;max-width:70ch}
+  .lb-close{position:fixed;top:18px;right:22px;width:40px;height:40px;border-radius:9px;border:1px solid rgba(244,242,236,.4);
+    background:transparent;color:var(--bg);font-family:var(--mono);font-size:17px;line-height:1;cursor:pointer;transition:all .16s}
+  .lb-close:hover{border-color:var(--bg);background:rgba(244,242,236,.12)}
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 24px 80px;
-            position: relative;
-            z-index: 1;
-        }
+  /* CARRUSEL freelance */
+  .car-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:56px 0 20px;flex-wrap:wrap}
+  .car-head h3{font-family:var(--mono);font-size:18px;font-weight:700;letter-spacing:-.01em}
+  .car-head .sub{font-family:var(--mono);font-size:13px;color:var(--dim)}
+  .car-ctrls{display:flex;gap:8px}
+  .car-btn{width:38px;height:38px;border-radius:8px;border:1px solid var(--line-2);background:var(--panel);color:var(--ink);font-family:var(--mono);font-size:16px;cursor:pointer;transition:all .16s;display:flex;align-items:center;justify-content:center}
+  .car-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .car-btn:disabled{opacity:.35;cursor:not-allowed;border-color:var(--line)}
+  .carousel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:8px;
+    scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
+  .carousel::-webkit-scrollbar{height:6px}
+  .carousel::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:6px}
+  .fcard{flex:0 0 clamp(280px,80%,360px);scroll-snap-align:start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px 26px 24px;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s}
+  .fcard:hover{border-color:var(--line-2);box-shadow:0 8px 30px -18px rgba(27,26,23,.35)}
+  .fcard-top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .fcard-glyph{width:36px;height:36px;border-radius:8px;background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);color:var(--accent);font-family:var(--mono);font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center}
+  .fcard h4{font-family:var(--mono);font-size:17px;font-weight:700;letter-spacing:-.01em}
+  .fcard .kind{font-family:var(--mono);font-size:11px;color:var(--dim)}
+  .fcard p{font-size:14.5px;color:var(--dim);margin-bottom:18px;flex:1}
+  .fcard-stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+  .fcard-stack span{font-family:var(--mono);font-size:11.5px;color:var(--dim);background:var(--bg-2);padding:4px 9px;border-radius:6px;border:1px solid var(--line)}
+  .fcard-link{font-family:var(--mono);font-size:13px;color:var(--accent)}
+  .fcard-link:hover{text-decoration:underline}
+  .fcard-link.muted{color:var(--dim)}
 
-        /* Language Toggle */
-        .lang-toggle {
-            position: fixed;
-            top: 20px;
-            right: 24px;
-            z-index: 100;
-            display: flex;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.78rem;
-            font-weight: 500;
-            letter-spacing: 0.04em;
-        }
+  /* whoami codeblock */
+  .codeblock{background:var(--panel);border:1px solid var(--line-2);border-radius:12px;overflow:hidden;font-family:var(--mono);font-size:14.5px;line-height:1.85;box-shadow:0 10px 40px -28px rgba(27,26,23,.5)}
+  .cb-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--bg-2)}
+  .cb-bar .tl{display:flex;gap:7px}
+  .cb-bar .tl i{width:11px;height:11px;border-radius:50%;display:block;border:1px solid rgba(0,0,0,.08)}
+  .cb-bar .fname{font-size:12px;color:var(--dim);margin-left:8px}
+  .cb-body{padding:22px 24px;display:grid;grid-template-columns:auto 1fr;gap:0 22px;overflow-x:auto}
+  .cb-body .ln{color:var(--dimmer);text-align:right;user-select:none}
+  .cb-body .code{color:var(--ink);white-space:pre}
+  .cb-body .code .k{color:var(--accent);font-weight:500}
+  .cb-body .code .s{color:var(--str)}
+  .cb-body .code .c{color:var(--dimmer)}
 
-        .lang-toggle button {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            padding: 8px 14px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
+  /* CERTIFICACIONES — tabla de hairlines, mismo lenguaje que el papel de ingeniería */
+  .certs{margin-top:34px}
+  .certs-head{font-family:var(--mono);font-size:12px;color:var(--dim);margin-bottom:14px;letter-spacing:.04em}
+  .certs-head::before{content:"› ";color:var(--accent)}
+  .cert-list{list-style:none;border-top:1px solid var(--line)}
+  .cert-list li{display:grid;grid-template-columns:58px 1fr auto;gap:2px 20px;align-items:baseline;
+    padding:13px 2px;border-bottom:1px solid var(--line)}
+  .cert-y{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+  .cert-n{font-size:15px}
+  .cert-i{font-family:var(--mono);font-size:12.5px;color:var(--dim);text-align:right}
+  .cert-id{grid-column:2/-1;font-family:var(--mono);font-size:11px;color:var(--dimmer)}
+  .cert-id::before{content:"cred. "}
 
-        .lang-toggle button:hover {
-            color: var(--text-secondary);
-        }
+  /* STACK */
+  .skills-groups{display:flex;flex-direction:column;gap:26px}
+  .skill-cat{font-family:var(--mono);font-size:12px;color:var(--dim);margin-bottom:12px;text-transform:lowercase;letter-spacing:.04em}
+  .skill-cat::before{content:"› ";color:var(--accent)}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  /* flex-wrap: si el nombre + la etiqueta no entran, la etiqueta baja de línea
+     en vez de desbordar (pasa con "LangChain aprendiendo") */
+  .chip{font-family:var(--mono);font-size:13.5px;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;transition:all .18s}
+  .chip:hover{border-color:var(--accent);transform:translateY(-2px)}
+  /* margin-left:auto en vez de space-between: la etiqueta queda pegada al borde
+     derecho tanto si entra en la misma línea como si baja a la segunda */
+  .chip .pct{color:var(--accent);font-size:11px;white-space:nowrap;margin-left:auto}
+  .chip .pct.learn{color:var(--str)}
 
-        .lang-toggle button.active {
-            background: var(--accent-dim);
-            color: var(--accent);
-        }
+  /* CONTACTO */
+  .contact{text-align:center}
+  .contact-card{background:var(--panel);border:1px solid var(--line-2);border-radius:16px;padding:60px 40px;position:relative;overflow:hidden}
+  .contact-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
+  .contact-card .comment{margin-bottom:18px;display:inline-block}
+  .contact-card h2{font-family:var(--mono);font-size:clamp(28px,4.4vw,46px);font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+  .contact-card p{color:var(--dim);margin-bottom:32px;font-size:17px}
+  .contact-card .hero-actions{justify-content:center}
 
-        .lang-toggle button:first-child {
-            border-right: 1px solid var(--border);
-        }
+  footer{border-top:1px solid var(--line);padding:28px 0}
+  .foot-in{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12.5px;color:var(--dim);flex-wrap:wrap;gap:10px}
 
-        /* Header */
-        .header {
-            margin-bottom: 48px;
-        }
+  /* ===== CV para impresión / PDF (oculto en pantalla) ===== */
+  #cv-doc{display:none}
 
-        .header__name {
-            font-size: 2.4rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 6px;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+  @media(max-width:820px){
+    .wrap{padding:0 22px}
+    .nav-links,.status{display:none}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .proj-top{grid-template-columns:1fr}
+    .proj-img{border-left:none;border-top:1px solid var(--line);min-height:180px}
+    /* en mobile la captura ocupa el ancho: 2/1 muestra prácticamente toda la pantalla */
+    .proj-shot{border-left:none;border-top:1px solid var(--line);min-height:0;aspect-ratio:2/1}
+    .proj-shot img{object-position:left top}
+    .proj-head .tag{margin-left:0}
+    .lb-in{padding:52px 16px 24px}
+    .cert-list li{grid-template-columns:52px 1fr;gap:2px 14px}
+    .cert-i{grid-column:2;text-align:left}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important}
+    .shot img{transition:none}
+    .shot:hover img,.shot:focus-visible img{transform:none}
+  }
 
-        .header__title {
-            font-size: 0.9rem;
-            color: var(--accent);
-            font-weight: 500;
-            margin-bottom: 20px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .header__contact {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px 24px;
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-        }
-
-        .header__contact a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .header__contact a:hover {
-            color: var(--text-primary);
-        }
-
-        .header__contact span::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background: var(--accent-dim);
-            border: 1px solid var(--accent);
-            border-radius: 50%;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-
-        /* Sections */
-        .section {
-            margin-bottom: 40px;
-        }
-
-        .section__title {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .profile {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.75;
-        }
-
-        /* Skills */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .skill-group {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 14px 16px;
-            transition: border-color 0.2s;
-        }
-
-        .skill-group:hover {
-            border-color: var(--border-accent);
-        }
-
-        .skill-group__label {
-            font-size: 0.72rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .skill-group__items {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .skill-group__items strong {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        /* Experience */
-        .job {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px 22px;
-            margin-bottom: 12px;
-            transition: border-color 0.2s;
-        }
-
-        .job:hover {
-            border-color: var(--border-accent);
-        }
-
-        .job__header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 4px 12px;
-            margin-bottom: 4px;
-        }
-
-        .job__role {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-        }
-
-        .job__dates {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-family: 'JetBrains Mono', monospace;
-            white-space: nowrap;
-        }
-
-        .job__company {
-            font-size: 0.88rem;
-            color: var(--accent);
-            margin-bottom: 12px;
-        }
-
-        .job__items {
-            list-style: none;
-            padding: 0;
-        }
-
-        .job__items li {
-            position: relative;
-            padding-left: 16px;
-            margin-bottom: 6px;
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .job__items li::before {
-            content: '›';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        /* Education */
-        .edu-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 2px 12px;
-            margin-bottom: 12px;
-        }
-
-        .edu-item__degree {
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .edu-item__year {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .edu-item__school {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            width: 100%;
-        }
-
-        .badge {
-            display: inline-block;
-            font-size: 0.72rem;
-            font-family: 'JetBrains Mono', monospace;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-weight: 500;
-            vertical-align: middle;
-            margin-left: 8px;
-        }
-
-        .badge--green {
-            background: var(--green-dim);
-            color: var(--green);
-            border: 1px solid var(--green);
-        }
-
-        /* Certs */
-        .cert-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .cert-list li {
-            font-size: 0.88rem;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-            padding-left: 16px;
-            position: relative;
-        }
-
-        .cert-list li::before {
-            content: '›';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        .cert-list li strong {
-            color: var(--text-primary);
-            font-weight: 500;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.82rem;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            font-size: 0.8rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .container { padding: 24px 16px 60px; }
-            .header__name { font-size: 1.8rem; }
-            .skills-grid { grid-template-columns: 1fr; }
-            .job__header { flex-direction: column; }
-            .edu-item { flex-direction: column; }
-            .lang-toggle { top: 12px; right: 12px; }
-        }
-
-        /* Print */
-        @media print {
-            body { background: #fff; color: #111; }
-            body::before { display: none; }
-            .lang-toggle { display: none; }
-            .section__title { color: #333; border-color: #ccc; }
-            .job, .skill-group { background: #fff; border-color: #ddd; }
-            .header__name { -webkit-text-fill-color: #111; background: none; }
-            .header__title { color: #555; }
-            a { color: #0066cc; }
-        }
-    </style>
+  @media print{
+    @page{margin:16mm 15mm}
+    body{background:#fff;color:#111}
+    body::before{display:none}
+    nav,footer,main{display:none!important}
+    #cv-doc{display:block;font-family:var(--sans);color:#111;max-width:none;font-size:11pt;line-height:1.45}
+    #cv-doc .cv-name{font-family:var(--mono);font-size:22pt;font-weight:800;letter-spacing:-.02em;margin-bottom:2pt}
+    #cv-doc .cv-role{font-size:11.5pt;color:#333;margin-bottom:6pt}
+    #cv-doc .cv-contact{font-family:var(--mono);font-size:9pt;color:#444;margin-bottom:14pt;border-bottom:1.5pt solid #111;padding-bottom:10pt}
+    #cv-doc .cv-contact span{margin-right:14pt}
+    #cv-doc h2{font-family:var(--mono);font-size:11pt;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin:16pt 0 8pt;padding-bottom:3pt;border-bottom:.75pt solid #bbb}
+    #cv-doc .cv-summary{margin-bottom:2pt}
+    #cv-doc .cv-item{margin-bottom:10pt;page-break-inside:avoid}
+    #cv-doc .cv-item .h{display:flex;justify-content:space-between;align-items:baseline;gap:12pt}
+    #cv-doc .cv-item .t{font-weight:700;font-size:11pt}
+    #cv-doc .cv-item .d{font-family:var(--mono);font-size:8.5pt;color:#666;white-space:nowrap}
+    #cv-doc .cv-item p{font-size:10pt;color:#333;margin-top:2pt}
+    #cv-doc .cv-item .st{font-family:var(--mono);font-size:8.5pt;color:#1F3A8A;margin-top:3pt}
+    #cv-doc .cv-skills{font-size:10pt}
+    #cv-doc .cv-skills b{font-family:var(--mono);font-size:9pt}
+    #cv-doc .cv-skills div{margin-bottom:4pt}
+    #cv-doc .cv-certs{font-size:10pt}
+    #cv-doc .cv-certs div{margin-bottom:3pt}
+    #cv-doc .cv-certs b{font-family:var(--mono);font-size:9pt;color:#1F3A8A;margin-right:7pt}
+    #cv-doc .cv-certs i{font-family:var(--mono);font-size:8pt;color:#777;font-style:normal;margin-left:5pt}
+  }
+</style>
 </head>
 <body>
+<nav>
+  <div class="wrap nav-in">
+    <a href="#" class="brand"><span class="accent">~</span>/dario_desalvo</a>
+    <div class="nav-links">
+      <a href="#work" data-en='projects'>proyectos</a>
+      <a href="#about" data-en='whoami'>whoami</a>
+      <a href="#skills" data-en='stack'>stack</a>
+      <a href="#contact" data-en='contact'>contacto</a>
+    </div>
+    <div class="nav-right">
+      <div class="status" data-en='<span class="dot"></span> open to new projects'><span class="dot"></span> abierto a nuevos proyectos</div>
+      <div class="lang-toggle" role="group" aria-label="Idioma / Language">
+        <button type="button" data-lang="es">ES</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
 
-<!-- Language Toggle -->
-<div class="lang-toggle">
-    <button id="btn-es" class="active" onclick="setLang('es')">ES</button>
-    <button id="btn-en" onclick="setLang('en')">EN</button>
-</div>
+<main>
+<header class="hero">
+  <div class="wrap">
+    <div class="prompt"><b>dario@buenosaires</b>:~$ whoami</div>
+    <h1 data-en='Hi, I&#39;m Darío.<br>Backend, automation<br>and <span class="accent">AI bots<span class="cursor"></span></span>'>Hola, soy Darío.<br>Backend, automatización<br>y <span class="accent">bots con IA<span class="cursor"></span></span></h1>
+    <p data-en='Systems Analyst with <strong>10+ years</strong> building webs, automation pipelines, Telegram bots with LLMs and internal systems running in production. <strong>From discovery to deploy.</strong>'>Analista de Sistemas con <strong>más de 10 años</strong> construyendo webs, sistemas internos, pipelines de automatización y bots de Telegram con LLMs. <br><strong>Del relevamiento al deploy.</strong></p>
+    <div class="hero-actions">
+      <a href="#work" class="btn btn-primary" data-en='view projects →'>ver proyectos →</a>
+      <button type="button" class="btn btn-cv" onclick="descargarCV()" data-en='download CV (PDF) ↓'>descargar CV (PDF) ↓</button>
+      <a href="#contact" class="btn btn-ghost" data-en='get in touch'>contactar</a>
+    </div>
 
-<div class="container">
+    <div class="stats">
+      <div class="stat"><div class="n">+10</div><div class="l" data-en='years of experience'>años de experiencia</div></div>
+      <div class="stat"><div class="n">2010</div><div class="l" data-en='first tech job'>primer trabajo de programador</div></div>
+      <div class="stat"><div class="n">6</div><div class="l" data-en='languages in the stack'>lenguajes en el stack</div></div>
+      <div class="stat"><div class="n">GMT-3</div><div class="l" data-en='Buenos Aires · remote'>Buenos Aires · remoto</div></div>
+    </div>
+  </div>
+</header>
 
-    <!-- HEADER -->
-    <header class="header">
-        <h1 class="header__name">Darío Ezequiel Desalvo</h1>
-        <p class="header__title" data-es="Analista de Sistemas · Desarrollador Backend · Automatización" data-en="Systems Analyst · Backend Developer · Automation">Analista de Sistemas · Desarrollador Backend · Automatización</p>
-        <div class="header__contact">
-            <span><a href="mailto:dariodesalvo@gmail.com">dariodesalvo@gmail.com</a></span>
-            <span><a href="tel:+5491135584971">+54 9 11 3558-4971</a></span>
-            <span><a href="https://github.com/dariodesalvo" target="_blank" rel="noopener">GitHub</a></span>
-            <span><a href="https://www.linkedin.com/in/dar%C3%ADo-desalvo/" target="_blank" rel="noopener">LinkedIn</a></span>
+<!-- PROYECTOS: al toque después de la presentación -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-label" data-en='projects'>proyectos</div>
+    <h2 class="sec-title" data-en='Things I&#39;ve built'>Cosas que construí</h2>
+    <p class="sec-intro" data-en='Strongest work first — real systems, in production, with clients behind them.'>Antecedentes relevantes — sistemas reales, en producción y con clientes detrás.</p>
+
+    <div class="proj-list">
+
+      <article class="proj">
+        <div class="proj-top">
+          <div class="proj-text">
+            <div class="proj-head"><span class="proj-idx">01</span><h3 data-en='Odoo Consulting'>Consultoría Odoo</h3><span class="tag" data-en='ERP · Consulting'>ERP · Consultoría</span></div>
+            <p data-en='Process discovery and implementation of Odoo ERP at an HVAC SME. Flow mapping in BPMN, migration from the previous accounting system and formalization of the projects workflow that today lives between Excel and WhatsApp.'>Relevamiento de procesos e implementación de Odoo ERP en una PyME de HVAC. Mapeo de flujos en BPMN, migración desde el sistema contable anterior y formalización del circuito de obras que hoy vive entre Excel y WhatsApp.</p>
+            <div class="proj-stack"><span>Odoo</span><span>BPMN</span><span data-en='Functional analysis'>Análisis funcional</span><span>Google Apps Script</span></div>
+            <div class="proj-links"><span class="muted mono" data-en='active engagement · 2026'>consultoría activa · 2026</span></div>
+          </div>
+          <button type="button" class="shot proj-shot" data-full="consultori.webp"
+                  data-cap="Visor de procesos — validación de circuitos BPMN por área, con conformidad y observaciones del cliente."
+                  data-cap-en="Process viewer — BPMN workflow validation per area, with client sign-off and observations."
+                  aria-label="Ampliar captura: visor de procesos">
+            <img src="consultori.webp" width="1821" height="902" loading="lazy" decoding="async"
+                 alt="Visor de procesos con el circuito P7 de compras y control de stock diagramado en carriles BPMN">
+            <span class="shot-zoom" data-en='&#10530; enlarge'>&#10530; ampliar</span>
+          </button>
         </div>
-    </header>
+      </article>
 
-    <!-- PERFIL -->
-    <section class="section">
-        <h2 class="section__title" data-es="Perfil Profesional" data-en="Professional Profile">Perfil Profesional</h2>
-        <p class="profile" data-es="Analista de Sistemas con más de 10 años de experiencia en desarrollo de software y administración de sistemas. Especializado en desarrollo backend con Python y PHP, automatización de procesos y administración de servidores Linux. Experiencia comprobada construyendo bots, pipelines de automatización, APIs REST y sistemas internos en entornos reales. Perfil orientado a la resolución de problemas, la mejora continua y la implementación de soluciones eficientes." data-en="Systems Analyst with 10+ years of experience in software development and systems administration. Specialized in backend development with Python and PHP, process automation, and Linux server administration. Proven track record building bots, automation pipelines, REST APIs, and internal systems in real-world environments. Problem-solving oriented, committed to continuous improvement and efficient solutions.">Analista de Sistemas con más de 10 años de experiencia en desarrollo de software y administración de sistemas. Especializado en desarrollo backend con Python y PHP, automatización de procesos y administración de servidores Linux. Experiencia comprobada construyendo bots, pipelines de automatización, APIs REST y sistemas internos en entornos reales. Perfil orientado a la resolución de problemas, la mejora continua y la implementación de soluciones eficientes.</p>
-    </section>
+      <article class="proj">
+        <div class="proj-top">
+          <div class="proj-text">
+            <div class="proj-head"><span class="proj-idx">02</span><h3>Sistema de Concursos · UBA</h3><span class="tag" data-en='In production'>En producción</span></div>
+            <p data-en='Internal application to manage faculty hiring competitions at the School of Philosophy and Letters, in production since 2019. Laravel + MySQL, with an automation layer over 11 departments and more than 250 competitions.'>Aplicación interna para la gestión de concursos docentes de la Facultad de Filosofía y Letras, en producción desde 2019. Laravel + MySQL, con una capa de automatización sobre 11 departamentos y más de 250 concursos.</p>
+            <div class="proj-stack"><span>Laravel</span><span>MySQL</span><span>Google Apps Script</span><span>Python</span></div>
+            <div class="proj-links"><span class="muted mono" data-en='internal system · 7+ years in production'>sistema interno · +7 años en producción</span></div>
+          </div>
+          <button type="button" class="shot proj-shot" data-full="concursos.webp"
+                  data-cap="Listado de concursos con filtros por departamento, estado de sustanciación y expediente GDE."
+                  data-cap-en="Competition listing with filters by department, hiring status and GDE case file."
+                  aria-label="Ampliar captura: listado de concursos">
+            <img src="concursos.webp" width="1821" height="959" loading="lazy" decoding="async"
+                 alt="Panel del sistema de concursos de UBA Filosofía y Letras mostrando el listado filtrado por departamento">
+            <span class="shot-zoom" data-en='&#10530; enlarge'>&#10530; ampliar</span>
+          </button>
+        </div>
+      </article>
 
-    <!-- HABILIDADES -->
-    <section class="section">
-        <h2 class="section__title" data-es="Habilidades Técnicas" data-en="Technical Skills">Habilidades Técnicas</h2>
+      <article class="proj">
+        <div class="proj-top">
+          <div class="proj-text">
+            <div class="proj-head"><span class="proj-idx">03</span><h3>Orientación Vocacional SOS</h3><span class="tag" data-en='Platform'>Plataforma</span></div>
+            <p data-en='Platform for a vocational guidance service: validated tests, video courses and a forum, built around a three-stage path — interests, aptitudes and choice. User accounts, promotions and tracking of every process. CHASIDE.'>Plataforma para un servicio de orientación vocacional: tests validados, cursos en video y foro, sobre un recorrido de tres etapas — intereses, aptitudes y elección. CHASIDE, Inteligencias múltiples.</p>
+            <div class="proj-stack"><span>Python</span><span>PHP</span><span>MySQL</span><span data-en='Automation'>Automatización</span></div>
+            <div class="proj-links"><span class="muted mono" data-en='freelance project'>proyecto freelance</span></div>
+          </div>
+          <button type="button" class="shot proj-shot" data-full="sos.webp"
+                  data-cap="Home de la plataforma: tests validados, cursos en video y acompañamiento profesional en tres etapas."
+                  data-cap-en="Platform home: validated tests, video courses and professional guidance across three stages."
+                  aria-label="Ampliar captura: home de Orientación Vocacional SOS">
+            <img src="sos.webp" width="1400" height="702" loading="lazy" decoding="async"
+                 alt="Home de Orientación Vocacional SOS con el recorrido de tres etapas del proceso de orientación">
+            <span class="shot-zoom" data-en='&#10530; enlarge'>&#10530; ampliar</span>
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- CARRUSEL: trabajos freelance relevantes -->
+    <div class="car-head">
+      <div>
+        <h3 data-en='Relevant freelance work'>Trabajos freelance relevantes</h3>
+        <span class="sub" data-en='// swipe to see more →'>// deslizá para ver más →</span>
+      </div>
+      <div class="car-ctrls">
+        <button type="button" class="car-btn" id="car-prev" aria-label="Anterior">‹</button>
+        <button type="button" class="car-btn" id="car-next" aria-label="Siguiente">›</button>
+      </div>
+    </div>
+
+    <div class="carousel" id="carousel">
+
+      <article class="fcard">
+        <button type="button" class="shot fcard-thumb" data-full="mejorleelo.webp"
+                data-cap="MejorLeelo — pegás un link de YouTube y devuelve un resumen ejecutivo, sin intros ni relleno."
+                data-cap-en="MejorLeelo — paste a YouTube link and get an executive summary, no intros, no filler."
+                aria-label="Ampliar captura: MejorLeelo">
+          <img src="mejorleelo.webp" width="1400" height="702" loading="lazy" decoding="async"
+               alt="Home de MejorLeelo con el campo para pegar un link de YouTube y obtener el resumen">
+          <span class="shot-zoom" data-en='&#10530; enlarge'>&#10530; ampliar</span>
+        </button>
+        <div class="fcard-top">
+          <div class="fcard-glyph">ML</div>
+          <div><h4>MejorLeelo</h4><span class="kind" data-en='SaaS · live'>SaaS · en vivo</span></div>
+        </div>
+        <p data-en='SaaS that transcribes and summarizes YouTube videos. Transcription with Whisper, map-reduce chunking summaries over LLMs, Google login, rate limiting and mailing. Deployed with its own CI/CD.'>SaaS que transcribe y resume videos de YouTube. Transcripción con Whisper, resúmenes por chunking map-reduce sobre LLMs, login con Google, rate limiting y envío de mails. Desplegado con CI/CD propio.</p>
+        <div class="fcard-stack"><span>Python</span><span>FastAPI</span><span>Whisper</span><span>PostgreSQL</span><span>Cloudflare</span></div>
+        <a href="https://mejorleelo.com" target="_blank" rel="noopener" class="fcard-link">↗ mejorleelo.com</a>
+      </article>
+
+      <article class="fcard">
+        <div class="fcard-thumb grid-ph"><div class="ph"><b>&gt;_</b><span data-en='screenshot coming soon'>captura en camino</span></div></div>
+        <div class="fcard-top">
+          <div class="fcard-glyph">NP</div>
+          <div><h4>Neural Pacer</h4><span class="kind" data-en='Telegram bot · AI'>Bot de Telegram · IA</span></div>
+        </div>
+        <p data-en='Telegram bot that acts as a training coach: it builds and adjusts running plans in natural language, orchestrated with LangChain over LLMs. Session tracking and automated reminders.'>Bot de Telegram que actúa como coach de entrenamiento: arma y ajusta planes de running con lenguaje natural, orquestado con LangChain sobre LLMs. Seguimiento de sesiones y recordatorios automatizados.</p>
+        <div class="fcard-stack"><span>Python</span><span>Telegram API</span><span>LangChain</span><span>LLM</span></div>
+        <a href="#" class="fcard-link muted" data-en='‹/› code'>‹/› código (en proceso de publicación)</a>
+      </article>
+
+      <article class="fcard">
+        <div class="fcard-thumb grid-ph"><div class="ph"><b>&gt;_</b><span data-en='screenshot coming soon'>captura en camino</span></div></div>
+        <div class="fcard-top">
+          <div class="fcard-glyph">ES</div>
+          <div><h4>Expo Suite</h4><span class="kind" data-en='Architecture · in progress'>Arquitectura · en desarrollo</span></div>
+        </div>
+        <p data-en='Toolkit for expo and event organizers: floor plan generator, stand allocation and sales, and the public fair map. Closed JSON contract as the single source of truth between the digitizer, the API and the multiplatform app.'>Suite de herramientas para organizadores de exposiciones y eventos: generador de planos de feria, venta de stands y plano público. Contrato JSON cerrado como fuente única entre el digitalizador, la API y la app multiplataforma.</p>
+        <div class="fcard-stack"><span>Flutter</span><span>FastAPI</span><span>PostgreSQL</span></div>
+        <a href="#" class="fcard-link muted" data-en='‹/› code'>‹/› código (en proceso de publicación)</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHOAMI -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-label" data-en='whoami'>whoami</div>
+    <h2 class="sec-title" data-en='About me'>Sobre mí</h2>
+    <div class="codeblock">
+      <div class="cb-bar">
+        <span class="tl"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i></span>
+        <span class="fname">dario.profile.py</span>
+      </div>
+      <div class="cb-body">
+        <div class="ln">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</div>
+        <div class="code" data-en='<span class="c"># systems analyst · backend &amp; automation</span>
+<span class="k">dario</span> = {
+  <span class="s">"role"</span>: <span class="s">"Backend Developer &amp; Automation"</span>,
+  <span class="s">"focus"</span>: [<span class="s">"APIs"</span>, <span class="s">"automation"</span>, <span class="s">"LLM integrations"</span>],
+  <span class="s">"philosophy"</span>: <span class="s">"simple code &gt; clever code"</span>,
+  <span class="s">"education"</span>: <span class="s">"Systems Analyst — UTN FRBA (2025)"</span>,
+  <span class="s">"languages"</span>: [<span class="s">"Spanish (native)"</span>, <span class="s">"English (conversational)"</span>],
+  <span class="s">"status"</span>: <span class="s">"open to new projects"</span>,
+}'><span class="c"># analista de sistemas · backend &amp; automatización</span>
+<span class="k">dario</span> = {
+  <span class="s">"rol"</span>: <span class="s">"Backend Developer &amp; Automatización"</span>,
+  <span class="s">"enfoque"</span>: [<span class="s">"APIs"</span>, <span class="s">"automatización"</span>, <span class="s">"integraciones LLM"</span>],
+  <span class="s">"filosofia"</span>: <span class="s">"código simple &gt; código clever"</span>,
+  <span class="s">"formacion"</span>: <span class="s">"Analista de Sistemas — UTN FRBA (2025)"</span>,
+  <span class="s">"idiomas"</span>: [<span class="s">"español (nativo)"</span>, <span class="s">"inglés (conversacional)"</span>],
+  <span class="s">"estado"</span>: <span class="s">"abierto a nuevos proyectos"</span>,
+}</div>
+      </div>
+    </div>
+
+    <div class="certs">
+      <div class="certs-head" data-en='certifications'>certificaciones</div>
+      <ul class="cert-list">
+        <li>
+          <span class="cert-y">2026</span>
+          <span class="cert-n">Model Context Protocol: Advanced Topics</span>
+          <span class="cert-i">Anthropic</span>
+          <span class="cert-id">j5jbhfecf688</span>
+        </li>
+        <li>
+          <span class="cert-y">2025</span>
+          <span class="cert-n">Google Cybersecurity</span>
+          <span class="cert-i">Google</span>
+          <span class="cert-id">XD6A57RMNFY2</span>
+        </li>
+        <li>
+          <span class="cert-y">2021</span>
+          <span class="cert-n">Ciencia de Datos 360 con Python</span>
+          <span class="cert-i">Escuela de Datos Vivos</span>
+        </li>
+        <li>
+          <span class="cert-y">2019</span>
+          <span class="cert-n">Diplomatura en Desarrollo Mobile</span>
+          <span class="cert-i">UTN Buenos Aires</span>
+        </li>
+        <li>
+          <span class="cert-y">2009</span>
+          <span class="cert-n">Professional Webmaster</span>
+          <span class="cert-i">UTN Buenos Aires</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STACK: al final -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-label" data-en='stack'>stack</div>
+    <h2 class="sec-title" data-en='What I build with'>Con qué construyo</h2>
+    <div class="skills-groups">
+
+      <div>
+        <div class="skill-cat" data-en='languages &amp; backend'>lenguajes &amp; backend</div>
         <div class="skills-grid">
-            <div class="skill-group">
-                <div class="skill-group__label" data-es="Lenguajes" data-en="Languages">Lenguajes</div>
-                <div class="skill-group__items"><strong>Python</strong>, <strong>Go</strong>, C, PHP, JavaScript, SQL</div>
-            </div>
-            <div class="skill-group">
-                <div class="skill-group__label">Backend & Frameworks</div>
-                <div class="skill-group__items"><strong>FastAPI</strong>, Laravel, Express.js, net/http (Go)</div>
-            </div>
-            <div class="skill-group">
-                <div class="skill-group__label" data-es="Bases de datos" data-en="Databases">Bases de datos</div>
-                <div class="skill-group__items"><strong>PostgreSQL</strong>, MySQL, MongoDB</div>
-            </div>
-            <div class="skill-group">
-                <div class="skill-group__label" data-es="Automatización & DevOps" data-en="Automation & DevOps">Automatización & DevOps</div>
-                <div class="skill-group__items"><strong>n8n</strong>, Docker, Linux, Bash, Git, CI/CD</div>
-            </div>
-            <div class="skill-group">
-                <div class="skill-group__label" data-es="APIs & Integraciones" data-en="APIs & Integrations">APIs & Integraciones</div>
-                <div class="skill-group__items">REST APIs, Telegram Bot API, Web Scraping, LLM APIs (Claude, Gemini)</div>
-            </div>
-            <div class="skill-group">
-                <div class="skill-group__label">Frontend</div>
-                <div class="skill-group__items">Vue.js, HTML/CSS, Bootstrap</div>
-            </div>
-            <div class="skill-group" style="grid-column: 1 / -1;">
-                <div class="skill-group__label" data-es="Otros" data-en="Other">Otros</div>
-                <div class="skill-group__items" data-es="Patrones de diseño, Paradigmas de programación, Web3/Solidity, Power BI" data-en="Design Patterns, Programming Paradigms, Web3/Solidity, Power BI">Patrones de diseño, Paradigmas de programación, Web3/Solidity, Power BI</div>
-            </div>
+          <div class="chip">Python <span class="pct">core</span></div>
+          <div class="chip">PHP / Laravel <span class="pct">core</span></div>
+          <div class="chip">FastAPI <span class="pct" data-en='solid'>sólido</span></div>
+          <div class="chip">SQL <span class="pct" data-en='solid'>sólido</span></div>
+          <div class="chip">JavaScript <span class="pct" data-en='solid'>sólido</span></div>
+          <div class="chip">Go <span class="pct learn" data-en='learning'>aprendiendo</span></div>
         </div>
-    </section>
+      </div>
 
-    <!-- EXPERIENCIA -->
-    <section class="section">
-        <h2 class="section__title" data-es="Experiencia Laboral" data-en="Work Experience">Experiencia Laboral</h2>
-
-        <article class="job">
-            <div class="job__header">
-                <span class="job__role" data-es="Desarrollador Backend & Automatización" data-en="Backend Developer & Automation">Desarrollador Backend & Automatización</span>
-                <span class="job__dates" data-es="2019 — Actualidad" data-en="2019 — Present">2019 — Actualidad</span>
-            </div>
-            <div class="job__company">Freelance</div>
-            <ul class="job__items">
-                <li data-es="Desarrollo de un bot de Telegram en Python con integración a LLMs (Claude, Gemini) para gestión de agenda con procesamiento de lenguaje natural, base de datos PostgreSQL y sistema de recordatorios automatizados vía n8n." data-en="Built a Telegram bot in Python with LLM integration (Claude, Gemini) for agenda management using natural language processing, PostgreSQL database, and automated reminders via n8n.">Desarrollo de un bot de Telegram en Python con integración a LLMs (Claude, Gemini) para gestión de agenda con procesamiento de lenguaje natural, base de datos PostgreSQL y sistema de recordatorios automatizados vía n8n.</li>
-                <li data-es="Construcción de pipelines de generación automática de videos en Python para contenido de ajedrez (ChessPulse), incluyendo renderizado de texto, procesamiento de imágenes y publicación automatizada." data-en="Built automated video generation pipelines in Python for chess content (ChessPulse), including text rendering, image processing, and automated publishing.">Construcción de pipelines de generación automática de videos en Python para contenido de ajedrez (ChessPulse), incluyendo renderizado de texto, procesamiento de imágenes y publicación automatizada.</li>
-                <li data-es="Desarrollo de API REST con FastAPI para blog con diseño temático, integración con redes sociales." data-en="Developed a REST API with FastAPI for a themed blog with social media integration.">Desarrollo de API REST con FastAPI para blog con diseño temático, integración con redes sociales.</li>
-                <li data-es="Administración de servidor Linux (Hetzner) consolidando múltiples servicios: n8n, aplicaciones web, bots." data-en="Linux server administration (Hetzner) consolidating multiple services: n8n, web applications, bots.">Administración de servidor Linux (Hetzner) consolidando múltiples servicios: n8n, aplicaciones web, bots.</li>
-                <li data-es="Desarrollo de aplicaciones web con Laravel (orientacionvocacionalsos.com.ar) y trivias interactivas con Vue.js." data-en="Web application development with Laravel (orientacionvocacionalsos.com.ar) and interactive trivia apps with Vue.js.">Desarrollo de aplicaciones web con Laravel (orientacionvocacionalsos.com.ar) y trivias interactivas con Vue.js.</li>
-            </ul>
-        </article>
-
-        <article class="job">
-            <div class="job__header">
-                <span class="job__role" data-es="Administrativo / Desarrollador Interno" data-en="Administrative Staff / Internal Developer">Administrativo / Desarrollador Interno</span>
-                <span class="job__dates" data-es="2013 — Actualidad" data-en="2013 — Present">2013 — Actualidad</span>
-            </div>
-            <div class="job__company" data-es="UBA — Facultad de Filosofía y Letras" data-en="UBA — Faculty of Philosophy and Literature">UBA — Facultad de Filosofía y Letras</div>
-            <ul class="job__items">
-                <li data-es="Diseño, desarrollo e implementación de una aplicación interna para gestión de concursos docentes utilizando Laravel y MySQL." data-en="Designed, developed, and deployed an internal application for faculty hiring management using Laravel and MySQL.">Diseño, desarrollo e implementación de una aplicación interna para gestión de concursos docentes utilizando Laravel y MySQL.</li>
-                <li data-es="Desarrollo de soluciones de automatización documental: generación de actas de cierre, procesamiento de datos desde Excel y creación de documentos formateados en lote." data-en="Developed document automation solutions: closure report generation, Excel data processing, and batch-formatted document creation.">Desarrollo de soluciones de automatización documental: generación de actas de cierre, procesamiento de datos desde Excel y creación de documentos formateados en lote.</li>
-            </ul>
-        </article>
-
-        <article class="job">
-            <div class="job__header">
-                <span class="job__role" data-es="Programador Web" data-en="Web Developer">Programador Web</span>
-                <span class="job__dates" data-es="Abr 2010 — May 2012" data-en="Apr 2010 — May 2012">Abr 2010 — May 2012</span>
-            </div>
-            <div class="job__company">Focusmedia</div>
-            <ul class="job__items">
-                <li data-es="Desarrollo backend de sitios web con PHP (quevasaestudiar.com)." data-en="Backend development of websites using PHP (quevasaestudiar.com).">Desarrollo backend de sitios web con PHP (quevasaestudiar.com).</li>
-                <li data-es="Sistemas de acreditación de eventos y automatización de campañas de email marketing." data-en="Event accreditation systems and email marketing campaign automation.">Sistemas de acreditación de eventos y automatización de campañas de email marketing.</li>
-            </ul>
-        </article>
-    </section>
-
-    <!-- FORMACIÓN -->
-    <section class="section">
-        <h2 class="section__title" data-es="Formación Académica" data-en="Education">Formación Académica</h2>
-
-        <div class="edu-item">
-            <span class="edu-item__degree" data-es='Analista Universitario de Sistemas <span class="badge badge--green">Completado</span>' data-en='University Systems Analyst <span class="badge badge--green">Completed</span>'>Analista Universitario de Sistemas <span class="badge badge--green">Completado</span></span>
-            <span class="edu-item__year">Nov 2025</span>
-            <span class="edu-item__school">Universidad Tecnológica Nacional — FRBA</span>
+      <div>
+        <div class="skill-cat" data-en='data, infra &amp; devops'>datos, infra &amp; devops</div>
+        <div class="skills-grid">
+          <div class="chip">PostgreSQL <span class="pct" data-en='solid'>sólido</span></div>
+          <div class="chip">MySQL <span class="pct" data-en='solid'>sólido</span></div>
+          <div class="chip">Docker <span class="pct" data-en='solid'>sólido</span></div>
+          <div class="chip">Linux <span class="pct" data-en='solid'>sólido</span></div>
+          <div class="chip">Git / CI/CD <span class="pct" data-en='solid'>sólido</span></div>
+          <div class="chip">Bash <span class="pct" data-en='solid'>sólido</span></div>
         </div>
-    </section>
+      </div>
 
-    <!-- CURSOS -->
-    <section class="section">
-        <h2 class="section__title" data-es="Cursos y Certificaciones" data-en="Courses & Certifications">Cursos y Certificaciones</h2>
-        <ul class="cert-list">
-            <li data-es="<strong>2025</strong> — Back-end Developer Path in Python & Go — BootDev (en curso 71%)" data-en="<strong>2025</strong> — Back-end Developer Path in Python & Go — BootDev (in progress 71%)"><strong>2025</strong> — Back-end Developer Path in Python & Go — BootDev (en curso 71%)</li>
-            <li data-es="<strong>2021</strong> — Ciencia de Datos 360 con Python — Escuela de Datos Vivos" data-en="<strong>2021</strong> — Data Science 360 with Python — Escuela de Datos Vivos"><strong>2021</strong> — Ciencia de Datos 360 con Python — Escuela de Datos Vivos</li>
-            <li data-es="<strong>2019</strong> — Diplomatura en Desarrollo Mobile — UTN Buenos Aires" data-en="<strong>2019</strong> — Mobile Development Diploma — UTN Buenos Aires"><strong>2019</strong> — Diplomatura en Desarrollo Mobile — UTN Buenos Aires</li>
-            <li data-es="<strong>2009</strong> — Professional Webmaster — UTN Buenos Aires" data-en="<strong>2009</strong> — Professional Webmaster — UTN Buenos Aires"><strong>2009</strong> — Professional Webmaster — UTN Buenos Aires</li>
-        </ul>
-    </section>
+      <div>
+        <div class="skill-cat" data-en='automation &amp; integrations'>automatización &amp; integraciones</div>
+        <div class="skills-grid">
+          <div class="chip">n8n <span class="pct" data-en='solid'>sólido</span></div>
+          <div class="chip">LLM APIs <span class="pct">Claude·Gemini</span></div>
+          <div class="chip">Telegram Bot API <span class="pct">bots</span></div>
+          <div class="chip">Web Scraping <span class="pct" data-en='solid'>sólido</span></div>
+          <div class="chip">Vue.js <span class="pct">frontend</span></div>
+          <div class="chip">LangChain <span class="pct learn" data-en='learning'>aprendiendo</span></div>
+        </div>
+      </div>
 
-    <!-- IDIOMAS -->
-    <section class="section">
-        <h2 class="section__title" data-es="Idiomas" data-en="Languages">Idiomas</h2>
-        <p class="profile" data-es="Inglés: B1" data-en="Spanish: Native — English: B1">Inglés: B1</p>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <footer class="footer">
-        <p>Darío Desalvo — Buenos Aires, Argentina — 2026</p>
-    </footer>
+<!-- CONTACTO -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="contact-card">
+      <div class="comment" data-en='let&#39;s build something that works'>construyamos algo que funcione</div>
+      <h2 data-en='Let&#39;s work together?'>¿Trabajamos juntos?</h2>
+      <p data-en='Available for full-time, freelance and consulting projects.'>Disponible para proyectos full-time, freelance y consultoría.</p>
+      <div class="hero-actions">
+        <a href="mailto:dariodesalvo@gmail.com" class="btn btn-primary">dariodesalvo@gmail.com</a>
+        <button type="button" class="btn btn-cv" onclick="descargarCV()" data-en='download CV (PDF) ↓'>descargar CV (PDF) ↓</button>
+        <a href="https://github.com/dariodesalvo" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+        <a href="https://www.linkedin.com/in/dar%C3%ADo-desalvo/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 Darío Desalvo</span>
+    <span data-en='handcrafted · Buenos Aires · GMT-3'>ejecutado con IA · Buenos Aires · GMT-3</span>
+  </div>
+</footer>
+
+<!-- ============ Lightbox de capturas ============ -->
+<dialog class="lb" id="lb" aria-label="Captura ampliada">
+  <div class="lb-in">
+    <img id="lb-img" alt="">
+    <p class="lb-cap" id="lb-cap"></p>
+  </div>
+  <button type="button" class="lb-close" id="lb-close" aria-label="Cerrar">✕</button>
+</dialog>
+
+<!-- ============ CV para impresión / Guardar como PDF ============ -->
+<div id="cv-doc">
+  <div class="cv-name">Darío Ezequiel Desalvo</div>
+  <div class="cv-role" data-en='Systems Analyst · Backend Developer &amp; Automation'>Analista de Sistemas · Desarrollador Backend &amp; Automatización</div>
+  <div class="cv-contact">
+    <span>dariodesalvo@gmail.com</span>
+    <span data-en='Buenos Aires, Argentina (GMT-3) · remote'>Buenos Aires, Argentina (GMT-3) · remoto</span>
+    <span>github.com/dariodesalvo</span>
+    <span>linkedin.com/in/darío-desalvo</span>
+  </div>
+
+  <h2 data-en='Profile'>Perfil</h2>
+  <p class="cv-summary" data-en='Systems Analyst (UTN FRBA) with 10+ years building APIs, automation pipelines, Telegram bots with LLMs and internal systems in production. From discovery to deploy: functional analysis, backend in Python and PHP, AI integrations and Linux server administration.'>Analista de Sistemas (UTN FRBA) con más de 10 años construyendo APIs, pipelines de automatización, bots de Telegram con LLMs y sistemas internos en producción. Del relevamiento al deploy: análisis funcional, backend en Python y PHP, integraciones con IA y administración de servidores Linux.</p>
+
+  <h2 data-en='Experience &amp; Projects'>Experiencia &amp; Proyectos</h2>
+
+  <div class="cv-item">
+    <div class="h"><span class="t" data-en='Odoo Consulting · ERP Implementation'>Consultoría Odoo · Implementación ERP</span><span class="d" data-en='2026 · active'>2026 · activo</span></div>
+    <p data-en='Process discovery and Odoo ERP implementation at an HVAC SME. Flow mapping in BPMN, migration from the previous accounting system and formalization of the projects workflow.'>Relevamiento de procesos e implementación de Odoo ERP en una PyME de climatización. Mapeo de flujos en BPMN, migración desde el sistema contable anterior y formalización del circuito de obras.</p>
+    <div class="st" data-en='Odoo · BPMN · Functional analysis · Google Apps Script'>Odoo · BPMN · Análisis funcional · Google Apps Script</div>
+  </div>
+
+  <div class="cv-item">
+    <div class="h"><span class="t">Sistema de Concursos — UBA (Filosofía y Letras)</span><span class="d" data-en='2019 · in production'>2019 · en producción</span></div>
+    <p data-en='Internal application to manage faculty hiring competitions, in production since 2019. Automation layer over 11 departments and more than 250 competitions.'>Aplicación interna para la gestión de concursos docentes, en producción desde 2019. Capa de automatización sobre 11 departamentos y más de 250 concursos.</p>
+    <div class="st">Laravel · MySQL · Google Apps Script · Python</div>
+  </div>
+
+  <div class="cv-item">
+    <div class="h"><span class="t" data-en='Orientación Vocacional SOS — Platform'>Orientación Vocacional SOS — Plataforma</span><span class="d">freelance</span></div>
+    <p data-en='Platform for a vocational guidance service: validated tests, video courses and a forum over a three-stage path, with user accounts and tracking of every process.'>Plataforma para un servicio de orientación vocacional: tests validados, cursos en video y foro sobre un recorrido de tres etapas, con cuentas de usuario y seguimiento de cada proceso.</p>
+    <div class="st" data-en='Python · PHP · MySQL · Automation'>Python · PHP · MySQL · Automatización</div>
+  </div>
+
+  <div class="cv-item">
+    <div class="h"><span class="t" data-en='MejorLeelo — SaaS (live)'>MejorLeelo — SaaS (en vivo)</span><span class="d">mejorleelo.com</span></div>
+    <p data-en='SaaS that transcribes and summarizes YouTube videos: Whisper, map-reduce summaries over LLMs, Google login, rate limiting and its own CI/CD.'>SaaS que transcribe y resume videos de YouTube: Whisper, resúmenes map-reduce sobre LLMs, login con Google, rate limiting y CI/CD propio.</p>
+    <div class="st">Python · FastAPI · Whisper · PostgreSQL · Cloudflare</div>
+  </div>
+
+  <div class="cv-item">
+    <div class="h"><span class="t" data-en='Neural Pacer — Telegram bot (training coach)'>Neural Pacer — Bot de Telegram (coach de entrenamiento)</span><span class="d">freelance</span></div>
+    <p data-en='Telegram bot that builds and adjusts training plans in natural language, orchestrated with LangChain over LLMs.'>Bot de Telegram que arma y ajusta planes de entrenamiento con lenguaje natural, orquestado con LangChain sobre LLMs.</p>
+    <div class="st">Python · Telegram API · LangChain · LLM</div>
+  </div>
+
+  <div class="cv-item">
+    <div class="h"><span class="t" data-en='Expo Suite — Platform for event organizers'>Expo Suite — Plataforma para organizadores de eventos</span><span class="d" data-en='freelance · in progress'>freelance · en desarrollo</span></div>
+    <p data-en='Toolkit for expo and event organizers: floor plan generator, stand allocation and sales, and the public fair map. Architecture and JSON contract defined as the single source of truth between the digitizer, the API and the multiplatform app.'>Suite de herramientas para organizadores de exposiciones y eventos: generador de planos de feria, venta de stands y plano público. Arquitectura y contrato JSON definidos como fuente única entre el digitalizador, la API y la app multiplataforma.</p>
+    <div class="st">Flutter · FastAPI · PostgreSQL</div>
+  </div>
+
+  <h2 data-en='Tech stack'>Stack técnico</h2>
+  <div class="cv-skills">
+    <div><b data-en='Languages &amp; backend:'>Lenguajes &amp; backend:</b> Python, PHP/Laravel, FastAPI, SQL, JavaScript, Go <span data-en='(learning)'>(aprendiendo)</span></div>
+    <div><b data-en='Data, infra &amp; devops:'>Datos, infra &amp; devops:</b> PostgreSQL, MySQL, Docker, Linux, Git / CI/CD, Bash</div>
+    <div><b data-en='Automation &amp; AI:'>Automatización &amp; IA:</b> n8n, LLM APIs (Claude · Gemini), Telegram Bot API, Web Scraping, Vue.js, LangChain <span data-en='(learning)'>(aprendiendo)</span></div>
+  </div>
+
+  <h2 data-en='Education'>Formación</h2>
+  <div class="cv-item">
+    <div class="h"><span class="t" data-en='Systems Analyst — UTN FRBA'>Analista de Sistemas — UTN FRBA</span><span class="d">2025</span></div>
+  </div>
+
+  <h2 data-en='Certifications'>Certificaciones</h2>
+  <div class="cv-certs">
+    <div><b>2026</b> Model Context Protocol: Advanced Topics — Anthropic <i>cred. j5jbhfecf688</i></div>
+    <div><b>2025</b> Google Cybersecurity — Google <i>cred. XD6A57RMNFY2</i></div>
+    <div><b>2021</b> Ciencia de Datos 360 con Python — Escuela de Datos Vivos</div>
+    <div><b>2019</b> Diplomatura en Desarrollo Mobile — UTN Buenos Aires</div>
+    <div><b>2009</b> Professional Webmaster — UTN Buenos Aires</div>
+  </div>
+
+  <h2 data-en='Languages'>Idiomas</h2>
+  <div class="cv-skills">
+    <div><b data-en='Spanish:'>Español:</b> <span data-en='native'>nativo</span></div>
+    <div><b data-en='English:'>Inglés:</b> <span data-en='conversational — preparing for FCE (Cambridge B2)'>conversacional — en preparación para el FCE (Cambridge B2)</span></div>
+  </div>
 </div>
 
 <script>
-    function setLang(lang) {
-        document.documentElement.lang = lang;
-        document.getElementById('btn-es').classList.toggle('active', lang === 'es');
-        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-
-        document.querySelectorAll('[data-' + lang + ']').forEach(function(el) {
-            el.innerHTML = el.getAttribute('data-' + lang);
-        });
-
-        try { localStorage.setItem('cv-lang', lang); } catch(e) {}
+  // ===== Toggle de idioma ES/EN (vanilla) =====
+  (function(){
+    var KEY='dd_lang';
+    function apply(lang){
+      document.querySelectorAll('[data-en]').forEach(function(el){
+        if(!el.hasAttribute('data-es')) el.setAttribute('data-es', el.innerHTML);
+        el.innerHTML = el.getAttribute('data-'+lang) || el.getAttribute('data-es');
+      });
+      document.documentElement.lang = lang;
+      document.querySelectorAll('.lang-toggle button').forEach(function(b){
+        b.classList.toggle('active', b.getAttribute('data-lang')===lang);
+      });
+      try{ localStorage.setItem(KEY, lang); }catch(e){}
     }
+    var saved='es';
+    try{ saved = localStorage.getItem(KEY) || 'es'; }catch(e){}
+    document.querySelectorAll('.lang-toggle button').forEach(function(b){
+      b.addEventListener('click', function(){ apply(b.getAttribute('data-lang')); });
+    });
+    apply(saved);
+  })();
 
-    // Restore saved language preference
-    try {
-        var saved = localStorage.getItem('cv-lang');
-        if (saved === 'en') setLang('en');
-    } catch(e) {}
+  // ===== Carrusel freelance (vanilla) =====
+  (function(){
+    var car = document.getElementById('carousel');
+    var prev = document.getElementById('car-prev');
+    var next = document.getElementById('car-next');
+    if(!car) return;
+    function step(){
+      var card = car.querySelector('.fcard');
+      return card ? card.offsetWidth + 16 : 320;
+    }
+    function update(){
+      var max = car.scrollWidth - car.clientWidth - 2;
+      prev.disabled = car.scrollLeft <= 2;
+      next.disabled = car.scrollLeft >= max;
+    }
+    prev.addEventListener('click', function(){ car.scrollBy({left:-step(),behavior:'smooth'}); });
+    next.addEventListener('click', function(){ car.scrollBy({left: step(),behavior:'smooth'}); });
+    car.addEventListener('scroll', update, {passive:true});
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  // ===== Lightbox de capturas (vanilla, <dialog> nativo) =====
+  (function(){
+    var lb = document.getElementById('lb');
+    if(!lb || !lb.showModal) return;
+    var img = document.getElementById('lb-img'), cap = document.getElementById('lb-cap');
+    document.querySelectorAll('.shot').forEach(function(b){
+      b.addEventListener('click', function(){
+        var thumb = b.querySelector('img');
+        var en = document.documentElement.lang === 'en';
+        img.src = b.getAttribute('data-full') || thumb.src;
+        img.alt = thumb.alt;
+        cap.textContent = (en && b.getAttribute('data-cap-en')) || b.getAttribute('data-cap') || '';
+        lb.showModal();
+      });
+    });
+    document.getElementById('lb-close').addEventListener('click', function(){ lb.close(); });
+    lb.addEventListener('click', function(e){ if(e.target === lb || e.target.classList.contains('lb-in')) lb.close(); });
+    lb.addEventListener('close', function(){ img.removeAttribute('src'); });
+  })();
+
+  // ===== Descargar CV: reformatea a CV limpio y abre Guardar como PDF =====
+  function descargarCV(){ window.print(); }
 </script>
-
 </body>
 </html>
